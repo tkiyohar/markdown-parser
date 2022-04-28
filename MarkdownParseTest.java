@@ -1,6 +1,7 @@
 // importing relevant libraries for use in code
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -73,5 +74,10 @@ public class MarkdownParseTest {
     @Test
     public void fixedTest(){
         assertEquals(2, 2);
+    }
+
+    @Test (expected = FileNotFoundException.class)
+    public void newBreakingTest() throws IOException{
+        MarkdownParse.getLinks(new String[]{"non-existent-file.md"});
     }
 }
