@@ -69,4 +69,9 @@ public class MarkdownParseTest {
         ArrayList <String> expected = new ArrayList<>();
         assertEquals(expected, MarkdownParse.getLinks(new String[]{"test-file-Charles-3.md"}));
     }
+
+    @Test
+    public void failingTest(){
+        assertEquals(1, 2);
+    }
 }
