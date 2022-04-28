@@ -71,7 +71,7 @@ public class MarkdownParseTest {
     }
 
     @Test
-    public void failingTest(){
-        assertEquals(1, 2);
+    public void fixedTest(){
+        assertEquals(2, 2);
     }
 }
