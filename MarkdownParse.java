@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class MarkdownParse {
 
     public static ArrayList<String> getLinks(String[] args) throws IOException {
-        if (args.length == 0) {throw new IllegalArgumentException("must provide input file");}
+        if (args.length != 1) {throw new IllegalArgumentException("must provide one input file");}
         Path fileName = Path.of(args[0]);
         List<String> lines = Files.readAllLines(fileName);
         ArrayList<String> toReturn = new ArrayList<>();
