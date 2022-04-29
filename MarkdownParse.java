@@ -6,13 +6,20 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.io.FileNotFoundException;
 
 public class MarkdownParse {
 
     public static ArrayList<String> getLinks(String[] args) throws IOException {
         if (args.length != 1) {throw new IllegalArgumentException("must provide one input file");}
-        Path fileName = Path.of(args[0]);
-        List<String> lines = Files.readAllLines(fileName);
+        List<String> lines;
+        try{
+            Path fileName = Path.of(args[0]);
+            lines = Files.readAllLines(fileName);
+        }
+        catch(IOException e) {
+            throw new FileNotFoundException("the file \"" + args[0] + "\" is not present in the classpath");
+        }
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         Pattern mdLinkSignature = Pattern.compile("\\[.+\\]\\(.+\\)$");
@@ -36,4 +43,3 @@ public class MarkdownParse {
         System.out.println(links.toString());
     }
 }
-
