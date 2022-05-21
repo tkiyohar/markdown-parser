@@ -21,13 +21,13 @@ public class MarkdownParse {
         }
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
-        Pattern mdLinkSignature = Pattern.compile("\\[.+\\]\\(.+\\)$");
-        Pattern linkSignature = Pattern.compile("\\]\\(.+\\)$");
+        Pattern mdLinkSignature = Pattern.compile("\\[.+\\]\\(.+\\)[^\\)]*");
+        Pattern linkSignature = Pattern.compile("\\]\\(.+\\)");
         for (String line: lines) {
             if (mdLinkSignature.matcher(line).matches()) {
                 Matcher linkMatcher = linkSignature.matcher(line);
                 if (linkMatcher.find()) {
-                    String link = line.substring(linkMatcher.start() + 2, line.length() - 1);
+                    String link = line.substring(linkMatcher.start() + 2, linkMatcher.end() - 1);
                     toReturn.add(link);
                     //linkSignature.matcher(line).reset();
                 }
